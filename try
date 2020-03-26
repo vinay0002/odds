@@ -1,0 +1,20 @@
+import requests
+import pandas as pd
+from bs4 import BeautifulSoup
+page=requests.get("https://www.oddschecker.com/horse-racing/vaal/14:20/winner")
+soup=BeautifulSoup(page.content,'html.parser')
+data=soup.find(id="t1")
+table=soup.find_all('tr',class_="diff-row evTabRow bc")
+# cont=table.find[0]('div',class_="bottom-row jockey")
+
+
+data1=[table.find(class_="bottom-row jockey").get_text()for table in data]
+# temp= [diff_row.find(class_="bottom-row jockey").get_text() for diff_row in data]
+
+# print(data1)
+player=pd.DataFrame(
+    {
+        'player':data1
+    }
+)
+print(player)
